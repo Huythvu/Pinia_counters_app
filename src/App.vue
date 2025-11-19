@@ -1,36 +1,25 @@
 <script setup>
-import {ref, computed} from "vue";
+import { ref, computed } from "vue";
+// import countersData from "@/assets/counters.js";
+import { useCounterStore } from "@/stores/counterStore.js";
+const counterStore = useCounterStore();
 
-import countersData from "@/assets/counters.js";
 import CounterComp from "@/components/CounterComp.vue";
-
-// State
-const counters = ref(countersData);
-
-// Funtions
-function decrement(id) {
-  let curCounter = counters.value.find((counter) => counter.id === id);
-  curCounter.count--;
-}
-
-function increment(id) {
-  let curCounter = counters.value.find((counter) => counter.id === id);
-  curCounter.count++;
-}
-
-const getSum = computed(() => {
-  let sum = 0;
-  counters.value.forEach((counter) => (sum += counter.count));
-  return sum;
-});
 </script>
 
 <template>
   <div class="counters">
     <h2>
-      Sum of counters: <span>{{ getSum }}</span>
+      Sum of counters: <span>{{ counterStore.count}}</span>
     </h2>
-    <CounterComp @decrementCount="decrement" @incrementCount="increment" v-for="counter in counters" :key="counter.id" :counter="counter"></CounterComp>
+
+    <CounterComp 
+    @decrementCount="counterStore.decrement(counter.id)" 
+    @incrementCount="counterStore.increment(counter.id)"
+    v-for="counter in counterStore.counters" 
+    :key="counter.id"
+    >
+    </CounterComp>
   </div>
 </template>
 

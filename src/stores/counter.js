@@ -8,5 +8,25 @@ export const useCounterStore = defineStore('counter', () => {
     count.value++
   }
 
-  return { count, doubleCount, increment }
+// // State
+
+// // Funtions
+// function decrement(id) {
+//   let curCounter = count.value.find((counter) => counter.id === id);
+//   curCounter.count--;
+// }
+
+// function increment(id) {
+//   let curCounter = count.value.find((counter) => counter.id === id);
+//   curCounter.count++;
+// }
+
+// const getSum = computed(() => {
+//   let sum = 0;
+//   count.value.forEach((count) => (sum += count.count));
+//   return sum;
+// });
+
+  return { count, doubleCount, increment, decrement}
 })
+
