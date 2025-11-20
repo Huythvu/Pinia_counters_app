@@ -1,24 +1,17 @@
 <script setup>
 import { ref, computed } from "vue";
-// import countersData from "@/assets/counters.js";
-import { useCounterStore } from "@/stores/counterStore.js";
+import { useCounterStore } from "@/stores/counter.js";
 const counterStore = useCounterStore();
-
 import CounterComp from "@/components/CounterComp.vue";
 </script>
 
 <template>
   <div class="counters">
     <h2>
-      Sum of counters: <span>{{ counterStore.count}}</span>
+      Sum of counters: <span>{{ counterStore.getSum }}</span>
     </h2>
 
-    <CounterComp 
-    @decrementCount="counterStore.decrement(counter.id)" 
-    @incrementCount="counterStore.increment(counter.id)"
-    v-for="counter in counterStore.counters" 
-    :key="counter.id"
-    >
+    <CounterComp v-for="counter in counterStore.counters" :key="counter.id" :counter="counter">
     </CounterComp>
   </div>
 </template>

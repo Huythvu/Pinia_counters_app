@@ -1,24 +1,17 @@
 <script setup>
 const props = defineProps({counter: Object});
+import { useCounterStore } from "@/stores/counter.js";
+const store = useCounterStore();
 
-const emit = defineEmits(["decrementCount", "incrementCount"]);
-
-function handleIncrement() {
-  emit("incrementCount", props.counter.id);
-}
-
-function handleDecrement() {
-  emit("decrementCount", props.counter.id);
-}
 </script>
 
 <template>
   <div class="counter-parent">
-    <button @click="handleDecrement">-</button>
+    <button @click="store.decrement(counter.id)">-</button>
     <div class="counter" :style="{backgroundColor: counter.color}">
       {{ counter.count }}
     </div>
-    <button @click="handleIncrement">+</button>
+    <button @click="store.increment(counter.id)">+</button>
   </div>
 </template>
 
